@@ -63,7 +63,6 @@ class Mouse(CompEye):
         CompEye.__init__(self)
         pg.FAILSAFE = False
         self.width, self.height = pg.size()
-        pg.dragTo(self.width // 2, self.height // 2)
 
     def show(self):
         while True:
@@ -71,7 +70,7 @@ class Mouse(CompEye):
             if cords is not None:
                 x, y = cords
                 x = 1 - x
-                pg.moveTo(x * self.width, y * self.height)
+                pg.dragTo(x * self.width, y * self.height)
 
 
 if __name__ == '__main__':

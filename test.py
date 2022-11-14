@@ -4,7 +4,7 @@ import pyautogui
 import pyautogui as pg
 import time
 pyautogui.FAILSAFE=False
-width,height =  pyautogui.Size()
+width,height =  pyautogui.Size(200,200)
 def get_cords(image):
     imageRGB = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
     results = hands.process(imageRGB)
