@@ -70,7 +70,7 @@ class Mouse(CompEye):
             if cords is not None:
                 x, y = cords
                 x = 1 - x
-                pg.dragTo(x * self.width, y * self.height)
+                pg.moveTo(x * self.width, y * self.height)
 
 
 if __name__ == '__main__':
