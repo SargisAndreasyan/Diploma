@@ -1,3 +1,5 @@
+from time import sleep
+
 import cv2
 import mediapipe as mp
 import pyautogui as pg
@@ -24,8 +26,19 @@ class CompEye:
             for handLms in results.multi_hand_landmarks:
                 yield handLms
 
+    @staticmethod
+    def min_time(prev):
+        now = cv2.getTickCount()
+        if ((now - prev) / cv2.getTickFrequency()) < 2e-05:
+            return False
+        else:
+            return True
+
     def read_cap(self):
         "success_flag and frame"
+        prev = cv2.getTickCount()
+        while not self.min_time(prev):
+            self.min_time(prev)
         return self.cap.read()
 
     def hand_detection(self, image_rgb):
