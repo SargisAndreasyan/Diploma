@@ -33,3 +33,7 @@ class CompEye:
         while True:
             success, img = self.read_cap()
             yield img
+
+    def release(self):
+        self.cap.release()
+        cv2.destroyAllWindows()
