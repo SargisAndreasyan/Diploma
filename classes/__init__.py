@@ -8,3 +8,4 @@ sys.path.append(PROJECT_ROOT)
 
 from mouse import Mouse
 from comp_eye import CompEye
+from hand import Hand
