@@ -4,6 +4,7 @@ import mediapipe as mp
 
 class CompEye:
     def __init__(self):
+        self.cv = cv2
         self.cap = cv2.VideoCapture(0)
 
     @staticmethod

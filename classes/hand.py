@@ -1,5 +1,5 @@
 import cv2
-
+import threading
 from comp_eye import CompEye
 import mediapipe as mp
 
@@ -21,14 +21,18 @@ class Hand(CompEye):
         return self.hands.process(image_rgb)
 
     def start_show(self):
-        while True:
-            success, img = self.read_cap()
-            image_rgb = self.convert_to_rgb(img)
-            result = self._hand_detection(image_rgb)
-            img = self.hands_drawing(img, result)
-            self.show_img('Frame', img)
-            if cv2.waitKey(33) == 27:
-                break
+        def func():
+            while True:
+                success, img = self.read_cap()
+                image_rgb = self.convert_to_rgb(img)
+                result = self._hand_detection(image_rgb)
+                img = self.hands_drawing(img, result)
+                self.show_img('Frame', img)
+                if cv2.waitKey(33) == 27:
+                    break
+
+        t1 = threading.Thread(target=func)
+        t1.start()
 
     def get_cords(self, finger):
         success, img = self.read_cap()
@@ -38,7 +42,7 @@ class Hand(CompEye):
             for hand in result.multi_hand_landmarks:
                 for i, cord in enumerate(hand.landmark):
                     if finger == i:
-                        return cord.x, cord.y
+                        return round(cord.x,3), round(cord.y,3)
 
     def hands_drawing(self, image, results):
         if results.multi_hand_landmarks:

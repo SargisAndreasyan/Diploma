@@ -1,7 +1,6 @@
 from comp_eye import CompEye
 import pyautogui as pg
 
-
 class Mouse(CompEye):
     def __init__(self):
         CompEye.__init__(self)
